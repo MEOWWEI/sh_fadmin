@@ -567,7 +567,8 @@
                         </div>
 
                         <div class="letter"style="padding: 8px;"  >
-                            {{$data['a_down_url']}}
+                            <p style="width: 100px;height: 25px;border:1px solid #4395FF;font-size: 16px;border-radius: 4px;text-align: center;line-height: 25px;color: red; height: 25px;">
+                                <a href="/{{$data['id']}}" target="_blank" style="color: #4395FF;"> 打开</a></p>
                         </div>
 
                         <div class='letter'style="padding: 8px;">

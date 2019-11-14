@@ -20,7 +20,7 @@ Route::group(['namespace'  => "Auth"], function () {
 });
 //后台主要模块
 Route::group(['middleware' => ['auth', 'permission']], function () {
-    Route::get('/',                     'HomeController@index');
+    Route::get('/admin',                     'HomeController@index');
     Route::get('/gewt',                 'HomeController@configr');
     Route::get('/index',                'HomeController@welcome');
     Route::post('/sort',                'HomeController@changeSort');
@@ -55,3 +55,8 @@ Route::get('/apps/adesc','AppController@adesc');//既点既改 描述
 Route::get('/apps/uploads','AppController@uploads');//应用显示
 Route::post('/apps/file','AppController@fileuploads');//应用上传
 Route::get('/apps/del/{id}','AppController@deldata');//删除软件
+
+
+//------------------------------------------前台---------------------------------------------
+Route::get('/{id?}','DownAppController@showdown');//下载index
+Route::get('id/{id=1}','DownAppController@showdown');//下载index
