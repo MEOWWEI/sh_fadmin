@@ -53,13 +53,14 @@ class DownAppController extends Controller
 
     public function downloads($id,Request $request){
         $filepath = DB::table('admin_app')->where('id',$id)->select('path')->first();
+        $filename = DB::table('admin_app')->where('id',$id)->select('app_title')->first();
         $filepath = get_object_vars($filepath);
+        $filename = get_object_vars($filename);
+        $filename = $filename['app_title'];
         $filepath = $filepath['path'];
-        $exists = Storage::exists($filepath);
-        if ($exists) {
-            return response()->download($filepath);
-            // return $contents;
+        return response()->download($filepath,$filename);
 
-        }
+
+
     }
 }
