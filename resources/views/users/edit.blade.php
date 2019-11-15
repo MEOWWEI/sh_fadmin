@@ -74,8 +74,16 @@
     </div>--}}
     <div class="layui-form-item">
         <label class="layui-form-label">是否停用：</label>
-        <div class="layui-input-block">
-            <input type="text" value="{{$info['status'] or '1'}}" name="status" placeholder="当状态值为1的时候正常，0为停用" autocomplete="off" class="layui-input">
+        <div class="layui-unselect layui-form-radio">
+            @if($info['status']==1)
+                <input type="radio" id="defualtAdd1" name="status" value="1" chcked title="启用中" checked >启用中
+                <input type="radio" id="defualtAdd" name="status" value="0"  title="停用">启用中
+            @else
+                <input type="radio" id="defualtAdd1" name="status" value="1"  title="启用">启用
+                <input type="radio" id="defualtAdd" name="status" value="0"  title="已停用" checked>已停用
+            @endif
+
+           {{-- <input type="text" value="{{$info['status'] or '1'}}" name="status" placeholder="当状态值为1的时候正常，0为停用" autocomplete="off" class="layui-input">--}}
         </div>
         {{--<div class="layui-input-block">
             <input type="number" value="{{$info['mobile'] or ''}}" name="tel" required lay-verify="required|phone" placeholder="请输入手机号码" autocomplete="off" class="layui-input">

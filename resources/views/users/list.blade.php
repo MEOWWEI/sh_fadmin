@@ -63,7 +63,7 @@
                 </td>
                 <td>
                     <div class="layui-inline" style="width: 100px;padding:0;height: 30px;">
-                        <button class="layui-btn layui-btn-small layui-btn-normal edit-btn" data-id="{{$info['id']}}" data-desc="修改用户" data-url="{{url('/users/'. $info['id'] .'/edit')}}"><i class="layui-icon">&#xe642;</i></button>
+                        <a class="layui-btn layui-btn-small layui-btn-normal edit-btn" data-id="{{$info['id']}}" data-desc="修改用户" data-url="{{url('/users/'. $info['id'] .'/edit')}}"><i class="layui-icon">&#xe642;</i></a>
                         <button class="layui-btn layui-btn-small layui-btn-danger del-btn" data-id="{{$info['id']}}" data-url="{{url('/users/'.$info['id'])}}"><i class="layui-icon">&#xe640;</i></button>
                     </div>
                 </td>
