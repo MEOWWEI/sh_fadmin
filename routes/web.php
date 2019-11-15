@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
     Route::resource('/menus',           'MenuController');
     Route::resource('/logs',            'LogController');
     Route::resource('/users',           'UserController');
-    Route::post('/users/userup',    'UserController@useredit');
+    Route::post('/users/userup',         'UserController@useredit');
     Route::get('/devices',              'UserController@devices');
     Route::get('/userinfo',             'UserController@userInfo');
     Route::post('/saveinfo/{type}',     'UserController@saveInfo');
@@ -38,7 +38,8 @@ Route::get('/apps','AppController@index');//应用展示
 Route::get('/apps/list/{id}','AppController@applist');//应用详情
 Route::post('/apps/icon/{id}','AppController@appicon');//图标上传
 Route::post('/apps/eq/{id}','AppController@appeq');//二维码
-Route::post('/apps/imgs/{id}','AppController@imgs');//预览图
+
+Route::post('/apps/uploadsimgs/{id}','AppController@uploadsimgs');//预览图
 
 Route::get('/apps/apptitles','AppController@apptitles');//既点既改 副标题
 Route::get('/apps/editj','AppController@editjdjg');//既点既改 副标题

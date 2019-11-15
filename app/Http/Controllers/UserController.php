@@ -30,15 +30,20 @@ class UserController extends BaseController
      */
     public function edit($id=0)
     {
-
         $info = $id?User::find($id):[];
+        if($info==null){
+            $info['status'] = 1;
+            $info['id'] = 1;
+        }
         return view('users.edit', ['id'=>$id,'roles'=>Role::all(),'info'=>$info]);
     }
     /**
      * 用户增加保存
      */
     public function store(StoreRequest $request){
+
         $insert = $request->except('_token', 'id');
+
         $insert['number'] = 100;
         $date = date('Y-m-d H:i:s',time());
         $insert['created_at'] = $date;
@@ -93,21 +98,51 @@ class UserController extends BaseController
         return view('users.userinfo',['userinfo'=>$user->user()]);
     }
     public function useredit(Request $request){
+
         $data = $request->except('_token');
         $id = $data['id'];
-        $edits['email'] =$data['email'];
-        $edits['csr'] = $data['csr'];
-        $edits['IssuerID'] = $data['IssuerID'];
-        $edits['miyaoID'] = $data['miyaoID'];
-        $edits['p8'] = $data['p8'];
-        $edits['status'] = $data['status'];
-        $result = DB::table('admin_users')->where('id',$id)
-            ->update(['email'=>$edits['email'],
-                      'csr'=>$edits['csr'],
-                      'IssuerID'=>$edits['IssuerID'],
-                      'p8'=>$edits['p8'],
-                      'status'=>$edits['status'],
-                      'miyaoID'=>$edits['miyaoID']]);
+        if($id == 0 ){
+            $insert['email'] = $data['email'];
+            $insert['csr'] = $data['csr'];
+            $insert['IssuerID'] = $data['IssuerID'];
+            $insert['miyaoID'] = $data['miyaoID'];
+            $insert['p8'] = $data['p8'];
+            $insert['status'] = $data['status'];
+            $insert['number'] = 100;
+            $date = date('Y-m-d H:i:s',time());
+            $insert['created_at'] = $date;
+            $insert['status'] = 1;
+            $insert['username'] = substr($insert['email'],0,strrpos($insert['email'],"@"));
+            $insert['password'] = '$2y$10$0nZ2IJJQzkuwTUvmsxVCYOAFw09sGceAk5b9p.AQ.h7I0YEj975rO';
+            $list = $_SERVER['HTTP_USER_AGENT'];
+            if (strpos($list, 'Android') !== false) {
+                preg_match("/(?<=Android )[\d\.]{1,}/", $list, $version);
+                $list = 'Platform:Android OS_Version:'.$version[0];
+            } elseif (strpos($list, 'iPhone') !== false) {
+                preg_match("/(?<=CPU iPhone OS )[\d\_]{1,}/", $list, $version);
+                $list = 'Platform:iPhone OS_Version:'.str_replace('_', '.', $version[0]);
+            } elseif (strpos($list, 'iPad') !== false) {
+                preg_match("/(?<=CPU OS )[\d\_]{1,}/", $list, $version);
+                $list ='Platform:iPad OS_Version:'.str_replace('_', '.', $version[0]);
+            }
+            $insert['device'] = $list;
+            //var_dump($insert['device']);die;
+            $result = DB::table('admin_users')->insert($insert);
+        }else{
+            $edits['email'] =$data['email'];
+            $edits['csr'] = $data['csr'];
+            $edits['IssuerID'] = $data['IssuerID'];
+            $edits['miyaoID'] = $data['miyaoID'];
+            $edits['p8'] = $data['p8'];
+            $edits['status'] = $data['status'];
+            $result = DB::table('admin_users')->where('id',$id)
+                ->update(['email'=>$edits['email'],
+                    'csr'=>$edits['csr'],
+                    'IssuerID'=>$edits['IssuerID'],
+                    'p8'=>$edits['p8'],
+                    'status'=>$edits['status'],
+                    'miyaoID'=>$edits['miyaoID']]);
+        }
         if($result>0 ){
             return response()->json(['status'=>'success','msg'=>'添加成功']);
         }else{

@@ -27,13 +27,13 @@
         </colgroup>
         <thead>
         <tr>
-            <th class="hidden-xs"></th>
+            <th class="hidden-xs">序号</th>
             <th class="hidden-xs">账号</th>
             <th class="hidden-xs" style="width: 550px;">创建时间</th>
          {{--   <th>可用数量</th>
             <th class="hidden-xs">类型</th>--}}
-            <th ></th>
-            <th ></th>
+            <th >账号状态</th>
+            <th >设备列表</th>
             <th >操作</th>
         </tr>
         </thead>

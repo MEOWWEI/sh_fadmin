@@ -51,6 +51,54 @@
         background-color: #F2F2F2;
         border:none;
     }
+    .role input[type='file']{opacity:0;}
+    .role{border:1px solid #c9cccf;text-align:center;width:200px;height:200px;line-height:200px;font-size:18px;margin-top:15px;float:left;margin-left:5px;}
+
+
+    .role img{width: 198px;height: 198px;display: none;}
+
+    input[type="checkbox"]{
+        display:none;
+    }
+    input + label{
+        box-shadow:rgb(16, 75, 243) 0px 0px 0px 1px;
+        width:60px;
+        height:20px;
+        display:inline-block;
+        border-radius:20px;
+        position:relative;
+        overflow:hidden;
+    }
+    input + label:before{
+        content:'';
+        position:absolute;
+        left:0px;
+        width:20px;
+        height:20px;
+        display:inline-block;
+        border-radius:20px;
+        background-color:#4cd964;
+        z-index:20;
+        transition:all 0.5s;
+    }
+    input + label:after{
+        content:'';
+        position:absolute;
+        border-radius:20px;
+        left:-40px;
+        width:60px;
+        height:20px;
+        display:inline-block;
+        background-color:#4898ff;
+        transition:all 0.5s;
+    }
+    input:checked + label:before{
+        left:40px;
+    }
+    input:checked + label:after{
+        left:0px;
+
+    }
 </style>
 <div class="wrap-container welcome-container">
     <div class="row">
@@ -395,14 +443,72 @@
 
                     <div style="width: 100%;">
                         <div  style="width: 260px;height: 120px;border-radius: 4px;margin-right: 10px; ">
-                            <img src="{{$data['img']}}" style="width: 240px;height: 120px;">
+                            <form method="post" enctype="multipart/form-data" action="/apps/uploadsimgs/{{$data['id']}}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}" style="display: none;">
+                                <img src="{{$data['img']}}" alt=""  class="file" >
+                                <div class="role" onclick="file(this)">
+                                    <img src="" alt="" id="goods_1" class="file" >
+                                    <span style="color: #ccc;">上传图像</span>
+                                    <input type="file"  name="goods_imgs[]" class="file" value="" id="goods1" onchange="le(this)">
+                                </div>
+                                <div class="role" style="display: none" onclick="file(this)">
+                                    <img src="" alt="" id="goods_2"  class="file" >
+                                    <span style="color: #ccc;">上传图像</span>
+                                    <input type="file"  name="goods_imgs[]" class="file" value="" id="goods2" onchange="le(this)">
+                                </div>
+
+                                <div class="role" onclick="copy(this)">
+                                    <span style="color: #ccc;">+</span>
+                                </div>
+                                <button type="submit">提交</button>
+                            </form>
+                            {{--<img src="{{$data['img']}}" style="width: 240px;height: 120px;">
                             <img src="{{$data['img1']}}" style="width: 240px;height: 120px;margin-left: 255px;margin-top: -120px;">
                             <form action="/apps/imgs/{{$data['id']}}" method="post" enctype="multipart/form-data" style="width: 185px;margin-top: -32px;margin-left: 40px;">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" style="display: none;">
                                 <input type="file"  name="file"  style=" width:70px;display:inline-block;line-height:25px;margin-top:-50px;border-radius:4px;height:25px; text-align:center; color: #4395FF;margin-left: 470px;border:1px solid #F2F2F2;">
                                 <input type="submit"  value="提交" style=" width:70px;display:inline-block;line-height:25px;border-radius:4px;height:25px; text-align:center;letter-spacing: 3px;margin-left:470px;margin-top:-14px;nborder:none;border:1px dashed #8f94a1;cursor:pointer; color: #ffffff;background-color:  #4395FF;">
-                            </form>
+                            </form>--}}
+                            <script>
+                                //点击圆框时上传图片
+                                function file(evn) {
+                                    var img_obj = $(evn).children(".file")
+                                    var file_id = $(img_obj[1]).attr("id")
+                                    document.getElementById(file_id).click()
+                                }
+                                //点击时复制角色框
+                                function copy(evn) {
+                                    var obj = $(evn).prev();
+                                    var num =  $(".role").length
+                                    console.log(num)
+                                    $(obj).clone().insertBefore(evn);
+                                    $(obj).css("display","block")
+                                    var img_obj = $(obj).children(".file")
+                                    console.log(img_obj)
+                                    var img_id = $(img_obj[0]).attr("id","goods_"+num)
+                                    var file_id = $(img_obj[1]).attr("id","goods"+num)
+                                }
+                                //左侧图像点击时显示图像
+                                function le(evn){
+                                    var id = $(evn).attr('id');//获取id
+                                    var num = "goods_"+id.substr(5,1);
+                                    var file = event.target.files[0];
+                                    if (window.FileReader) {
+                                        var reader = new FileReader();
+                                        reader.readAsDataURL(file);
+                                        //监听文件读取结束后事件
+                                        reader.onloadend = function (e) {
+                                            var divObj= $(evn).prev()  //获取div的DOM对象
+                                            $(divObj).html("") //插入文件名
+                                            $("#"+num).css("display","block");
+                                            $("#"+num).attr("src",e.target.result);    //e.target.result就是最后的路径地址
 
+
+                                        };
+                                    }
+
+                                }
+                            </script>
                         </div>
                     </div>
 
@@ -567,7 +673,6 @@
                         </div>
 
                     </div>
-
                 </div>
                 <script>
                     function saveuser(id){
@@ -631,15 +736,18 @@
                         </div>
 
                         <div class="letter"style="padding: 8px;"  >
-                            @if($data['a_c_ation']==1)
-                            <div style="border:1px solid #f2f2f2;width: 60px;height: 25px;background-color:#4395FF;border-radius:50%; ">
-                                <div style="border: 1px solid #f2f2f2;background-color: #f2f2f2; width: 20px;height: 20px;border-radius: 50px;margin-top:1px;margin-left: 30px;"></div>
+
+                            <div class="letter layui-form-radio ">
+                                @if($data['a_c_ation']==1)
+                                    <input type="checkbox" name="sex" id="male" />
+                                    <label for="male"></label>
+                                @else
+                                    <input type="checkbox" name="sex" id="male" />
+                                    <label for="male"></label>
+                                @endif
+
+                                {{-- <input type="text" value="{{$info['status'] or '1'}}" name="status" placeholder="当状态值为1的时候正常，0为停用" autocomplete="off" class="layui-input">--}}
                             </div>
-                            @else
-                            <div style="border:1px solid #4395FF;width: 60px;height: 25px;background-color:#f2f2f2;border-radius:50%; ">
-                                <div style="border: 1px solid #f2f2f2;background-color: #4395FF; width: 20px;height: 20px;border-radius: 50px;margin-top:1px;margin-left: 4px;"></div>
-                            </div>
-                            @endif
                         </div>
 
                         <div class="letter" style="padding: 8px;">
