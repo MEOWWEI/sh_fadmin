@@ -325,12 +325,18 @@ class AppController extends BaseController{
         $src = (array)$src;
         $src = $src['path'];
         $db = DB::table('admin_app')->where('id',$id)->delete();
-        if($src != null || $src != ''){
-            $res = unlink($src);
-        }
         if($db>0){
+            if($src != null || $src != ''){
+                $res = unlink($src);
+                return redirect('/apps/');
+            }else{
+                return redirect('/apps/');
+            }
+        }else{
             return redirect('/apps/');
         }
+
+
 
     }
 
