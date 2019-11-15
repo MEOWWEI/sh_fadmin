@@ -14,7 +14,7 @@ class DownAppController extends Controller
 {
 
     public function showdown($id=13){
-        if($id！=13){
+        if($id !==13){
             $data = DB::table('admin_app')->where('id',$id)->first();
             $data = get_object_vars($data);//转数组
             $img = $data['img'];

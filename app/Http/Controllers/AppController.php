@@ -112,6 +112,17 @@ class AppController extends BaseController{
      * @return int
      * 既点既改
      */
+    public function apptitles(){
+        $arr = Input::get();//接收ajax传递的参数
+        $result = DB::table('admin_app')->where('id',$arr['id'])->update(['app_title'=>$arr['username']]);
+        //var_dump($result);
+        if($result){
+            $status = 1;
+        }else{
+            $status = 2;
+        }
+        return $status; //将结果返回给展示页面
+    }
     public function editjdjg(){
         $arr = Input::get();//接收ajax传递的参数
         $result = DB::table('admin_app')->where('id',$arr['id'])->update(['f_title'=>$arr['username']]);

@@ -40,6 +40,7 @@ Route::post('/apps/icon/{id}','AppController@appicon');//图标上传
 Route::post('/apps/eq/{id}','AppController@appeq');//二维码
 Route::post('/apps/imgs/{id}','AppController@imgs');//预览图
 
+Route::get('/apps/apptitles','AppController@apptitles');//既点既改 副标题
 Route::get('/apps/editj','AppController@editjdjg');//既点既改 副标题
 Route::get('/apps/fage','AppController@fage');//既点既改 年龄
 Route::get('/apps/clas','AppController@clas');//既点既改 类型

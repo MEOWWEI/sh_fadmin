@@ -74,9 +74,36 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" onclick="apptitle({{$data['id']}})">
                         <p class="title">应用名称</p>
-                        <span class="info">{{$data['app_title']}}</span>
+                        {{--<span class="info">{{$data['app_title']}}</span>--}}
+                        <span id="bbb12{{$data['id']}} "class="info" >{{$data['app_title']}}</span>
+                        <input type="text" value="{{$data['app_title']}}" style="display: none;" id="aaa12{{$data['id']}}"
+                               onblur="apptitles({{$data['id']}})">
+                        <script>
+                            function apptitle(id){
+                                document.getElementById('aaa12'+id).style.display='block';//显示input
+                                document.getElementById('bbb12'+id).innerHTML="";//span标签的值设置为空
+                            }
+                            function apptitles(id){
+                                var username = document.getElementById('aaa12'+id).value;//获取文本框的值
+                                $.ajax({
+                                    type:'GET',//请求方式
+                                    data:{'id':id,'username':username},//传递参数
+                                    url:"{{url('/apps/apptitles')}}",//地址
+                                    success:function(e){//回调
+                                        if(e==1){
+                                            document.getElementById('aaa12'+id).style.display = 'none';//如果修改成功,input隐藏
+                                            document.getElementById('bbb12'+id).innerHTML = username;//修改成功,将表里修改后的数据赋值给span标签
+                                        }else{
+                                            alert('修改失败');
+                                            window.location.reload();
+                                        }
+                                    }
+
+                                })
+                            }
+                        </script>
                     </div>
 
                     <div class="col-md-2">
