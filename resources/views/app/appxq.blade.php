@@ -319,7 +319,13 @@
                         </div>
                         <div class='letter' style="width: 294%;padding: 8px;" onclick="briefs({{$data['id']}})">
 
-                            <span id="bbb6{{$data['id']}}" style="background-color: #f2f2f2;width: 100%;height: 60px;">{{$data['f_brief']}}</span>
+                            <span id="bbb6{{$data['id']}}" style="background-color: #f2f2f2;width: 100%;
+                                                                    height: 72px;
+                                                                    text-overflow: ellipsis;
+                                                                    -webkit-line-clamp: 4;
+                                                                    display: -webkit-box;
+                                                                    overflow: hidden;
+                                                                    -webkit-box-orient: vertical;">{{$data['f_brief']}}</span>
                             <input type="text" value="{{$data['f_brief']}}" style="display: none;height: 60px;" id="aaa6{{$data['id']}}"
                                    onblur="brief({{$data['id']}})">
                             <script>
@@ -481,7 +487,7 @@
                         </div>
 
                         <div class="letter"style="padding: 8px;"  >
-                            <span  style="background-color: #f2f2f2;">{{$data['a_down']}} 次</span>
+                            <span  style="background-color: #f2f2f2;">{{$data['a_down']?$data['a_down']:'0'}} 次</span>
 
                         </div>
 
@@ -490,7 +496,7 @@
                         </div>
 
                         <div class="letter"style="padding: 8px;" onclick="limitnum({{$data['id']}})" >
-                            <span id="bbb9{{$data['id']}}" style="background-color: #f2f2f2;">{{$data['a_down_limit']}}次</span>
+                            <span id="bbb9{{$data['id']}}" style="background-color: #f2f2f2;">{{$data['a_down_limit']?$data['a_down_limit']:'0'}}次</span>
                             <input type="text" value="{{$data['a_down_limit']}}" style="display: none; width: 200px;" id="aaa9{{$data['id']}}"
                                    onblur="limitnums({{$data['id']}})">
                             <script>
@@ -524,7 +530,13 @@
                             描述
                         </div>
                         <div class='letter' style="width: 294%;padding: 8px;" onclick="adesc({{$data['id']}})">
-                            <span id="bbb11{{$data['id']}}" style="background-color: #f2f2f2;width: 100%;height: 60px;">{{$data['a_desc']}}</span>
+                            <span id="bbb11{{$data['id']}}" style="background-color: #f2f2f2;width: 100%;
+                                                                     height: 72px;
+                                                                     text-overflow: ellipsis;
+                                                                     -webkit-line-clamp: 4;
+                                                                     display: -webkit-box;
+                                                                     overflow: hidden;
+                                                                     -webkit-box-orient: vertical;">{{$data['a_desc']}}</span>
                             <input type="text" value="{{$data['a_desc']}}" style="display: none;height: 60px;" id="aaa11{{$data['id']}}"
                                    onblur="adescs({{$data['id']}})">
                             <script>

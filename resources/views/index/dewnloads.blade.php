@@ -112,7 +112,7 @@
                 <div data-v-6a8c2810="" class="install-line">
                     <div data-v-6a8c2810="" class="install-line-l">
                         <div data-v-6a8c2810="" style="display: flex; align-items: center;">
-                            <button data-v-6a8c2810="" class="install-btn">获取</button>
+                            <a href="/download/{{$data['id']}}" data-v-6a8c2810="" class="install-btn">获取</a>
                             <div data-v-6a8c2810="" class="install-tips">App 内购买项目</div>
                         </div>
                     </div>

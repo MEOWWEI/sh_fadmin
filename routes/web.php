@@ -60,4 +60,4 @@ Route::get('/apps/del/{id}','AppController@deldata');//删除软件
 
 //------------------------------------------前台---------------------------------------------
 Route::get('/{id?}','DownAppController@showdown');//下载index
-Route::get('id/{id=1}','DownAppController@showdown');//下载index
+Route::get('/download/{id}','DownAppController@downloads');
