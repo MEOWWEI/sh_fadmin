@@ -18,6 +18,7 @@ Route::group(['namespace'  => "Auth"], function () {
     Route::post('/login',               'LoginController@login');
     Route::get('/logout',               'LoginController@logout')->name('logout');
 });
+Route::get('/lout','LoginController@lout');
 //后台主要模块
 Route::group(['middleware' => ['auth', 'permission']], function () {
     Route::get('/admin',                     'HomeController@index');

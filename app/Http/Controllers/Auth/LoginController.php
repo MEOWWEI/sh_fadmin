@@ -42,6 +42,10 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    public function lout(){
+        Session::Remove('email');
+        return redirect('/login');
+    }
     public function login(Request $request)
     {
         if($request->input('verity')==session('code'))return $this->doLogin($request);
