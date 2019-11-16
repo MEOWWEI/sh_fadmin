@@ -400,7 +400,7 @@ class AppController extends BaseController
             $entension = $file->getClientOriginalExtension();   //上传文件的后缀.
             $newName = md5(date('Ymdhis') . $clientName) . "." . $entension;    //定义      上传文件的新名称
             $path = $file->move('/uploads', $newName);    //把缓存文件移动到指定文件夹
-
+            var_dump($path);die;
             $db = DB::table('admin_app')->insert(['app_title' => $fileextension, 'app_id' => $fileextension, 'filesize' => $filesize, 'a_title' => $fileextension, 'path' => $path]);
             if ($db > 0) {
                 return redirect('/apps');
