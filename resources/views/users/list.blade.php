@@ -28,6 +28,8 @@
         <thead>
         <tr>
             <th class="hidden-xs">序号</th>
+            <th class="hidden-xs">账号</th>
+
             <th class="hidden-xs">邮箱</th>
             <th class="hidden-xs" style="width: 550px;">创建时间</th>
          {{--   <th>可用数量</th>
@@ -41,6 +43,7 @@
         @foreach($list as $info)
 
                 <td class="hidden-xs">{{$info['id']}}</td>
+                <td class="hidden-xs">{{$info['username']}}</td>
                 {{--<td class="hidden-xs">{{$info['roles'][0]['display_name'] or '已删除'}}</td>--}}
                 <td>{{$info['email']}}</td>
                 <td class="hidden-xs">{{$info['created_at']}}</td>
