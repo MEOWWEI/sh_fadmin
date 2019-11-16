@@ -453,7 +453,7 @@
                                 </div>
                                 <div class="role" style="display: none" onclick="file(this)">
                                     <img src="" alt="" id="goods_2"  class="file" style="width: 100%;>
-                                    <span style="color: #ccc;">上传图像</span>
+                                    <span style="color: #cccccc;">上传图像</span>
                                     <input type="file"  name="goods_imgs[]" class="file" value="" id="goods2" onchange="le(this)">
                                 </div>
 

@@ -65,9 +65,9 @@ class UserController extends BaseController
         //var_dump($insert['device']);die;
         $user = DB::table('admin_users')->insert($insert);
         if($user>0 || $user==true){
-            return response()->json(['status'=>'success','msg'=>'添加成功']);
+            return response()->json(['status'=>'success','msg'=>'成功']);
         }else{
-            return Response()->json(['status'=>'fail','msg'=>'添加失败']);
+            return Response()->json(['status'=>'fail','msg'=>'未发生变化！']);
         }
 
         /*$model = new User();
@@ -94,7 +94,7 @@ class UserController extends BaseController
     public function userInfo(){
 
         $user = new Admin();
-        var_dump(111);die;
+
         return view('users.userinfo',['userinfo'=>$user->user()]);
     }
     public function useredit(Request $request){
@@ -144,9 +144,9 @@ class UserController extends BaseController
                     'miyaoID'=>$edits['miyaoID']]);
         }
         if($result>0 ){
-            return response()->json(['status'=>'success','msg'=>'添加成功']);
+            return response()->json(['status'=>'success','msg'=>'成功']);
         }else{
-            return Response()->json(['status'=>'fail','msg'=>'添加失败']);
+            return Response()->json(['status'=>'fail','msg'=>'未发生变化']);
         }
 
 
