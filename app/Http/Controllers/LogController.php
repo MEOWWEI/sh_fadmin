@@ -18,6 +18,11 @@ class LogController extends Controller
     {
         return $this->show($request);
     }
+
+    public function lout(){
+        Session::Remove('email');
+        return redirect('/login');
+    }
     /**
      * 根据条件日志列表查询
      */
