@@ -445,7 +445,7 @@
                         <div  style="width: 260px;height: 120px;border-radius: 4px;margin-right: 10px; ">
                             <form method="post" enctype="multipart/form-data" action="/apps/uploadsimgs/{{$data['id']}}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" style="display: none;">
-                                <img src="{{$data['img']}}" alt=""  class="file" >
+                                <img src="{{$data['img']}}" alt=""  class="file" style="width: 100%;height: 60%;" >
                                 <div class="role" onclick="file(this)">
                                     <img src="" alt="" id="goods_1" class="file" >
                                     <span style="color: #ccc;">上传图像</span>
