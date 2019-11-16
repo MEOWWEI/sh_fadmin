@@ -28,7 +28,7 @@
         <thead>
         <tr>
             <th class="hidden-xs">序号</th>
-            <th class="hidden-xs">账号</th>
+            <th class="hidden-xs">邮箱</th>
             <th class="hidden-xs" style="width: 550px;">创建时间</th>
          {{--   <th>可用数量</th>
             <th class="hidden-xs">类型</th>--}}
