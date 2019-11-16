@@ -445,14 +445,14 @@
                         <div  style="width: 260px;height: 120px;border-radius: 4px;margin-right: 10px; ">
                             <form method="post" enctype="multipart/form-data" action="/apps/uploadsimgs/{{$data['id']}}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" style="display: none;">
-                                <img src="{{$data['img']}}" alt=""  class="file" style="width: 100%;height: 60%;" >
+                                <img src="{{$data['img']}}" alt=""  class="file" style="width: 100%;" >
                                 <div class="role" onclick="file(this)">
-                                    <img src="" alt="" id="goods_1" class="file" >
+                                    <img src="" alt="" id="goods_1" class="file" style="width: 100%;"  >
                                     <span style="color: #ccc;">上传图像</span>
                                     <input type="file"  name="goods_imgs[]" class="file" value="" id="goods1" onchange="le(this)">
                                 </div>
                                 <div class="role" style="display: none" onclick="file(this)">
-                                    <img src="" alt="" id="goods_2"  class="file" >
+                                    <img src="" alt="" id="goods_2"  class="file" style="width: 100%;>
                                     <span style="color: #ccc;">上传图像</span>
                                     <input type="file"  name="goods_imgs[]" class="file" value="" id="goods2" onchange="le(this)">
                                 </div>
